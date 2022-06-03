@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.orderfoodappadmin.CustomDialog
 import com.example.orderfoodappadmin.R
 import com.example.orderfoodappadmin.activity.ProfileActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -25,8 +26,7 @@ import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var dialog: Dialog
+    private lateinit var dialog: CustomDialog
 //  private lateinit var fusedLocationProvider: FusedLocationProviderClient
 
 
@@ -52,9 +52,9 @@ class LoginFragment : Fragment() {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        firebaseAuth = FirebaseAuth.getInstance()
+    override fun onStart() {
+        super.onStart()
+
 
         mAuth = Firebase.auth
         val user = mAuth.currentUser
@@ -63,23 +63,23 @@ class LoginFragment : Fragment() {
             val intent = Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
 
-        val emailPassed = SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_EMAIL
-        val passwordPassed = SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_PASSWORD
+        mAuth = Firebase.auth
+        val user = mAuth.currentUser
 
-        if (emailPassed.isNotEmpty() && passwordPassed.isNotEmpty()) {
-            email_editText.setText(emailPassed)
-            password_editText.setText(passwordPassed)
+        if (user != null) {
+            Log.d("login", user.email.toString())
 
-            //reset passed data
-            SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_EMAIL = ""
-            SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_PASSWORD = ""
+            val intent = Intent(activity, ProfileActivity::class.java)
+            startActivity(intent)
         }
+
         //init loading dialog
-        dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.dialog_loading_login)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog = CustomDialog(requireContext())
         login_button.setOnClickListener {
             dialog.show()
             loginUser()
@@ -108,7 +108,7 @@ class LoginFragment : Fragment() {
                             //set delay for smooth animation
                             val handler = Handler()
                             handler.postDelayed({
-                                if (dialog.isShowing) {
+                                if (dialog.isShowing()) {
                                     dialog.dismiss()
                                 }
                                 // Sign in success, update UI with the signed-in user's information
@@ -123,7 +123,7 @@ class LoginFragment : Fragment() {
                             }, 1000)
 //                            }
                         } else {
-                            if (dialog.isShowing) {
+                            if (dialog.isShowing()) {
                                 dialog.dismiss()
                             }
                             Toast.makeText(
