@@ -1,60 +1,139 @@
 package com.example.orderfoodappadmin.fragment
 
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.example.orderfoodappadmin.R
+import com.example.orderfoodappadmin.activity.ProfileActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var dialog: Dialog
+//  private lateinit var fusedLocationProvider: FusedLocationProviderClient
+
+
+    //Element UI
+    lateinit var email_editText: EditText
+    lateinit var password_editText: EditText
+    lateinit var login_button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        // Inflate the layout for this
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        email_editText = view.findViewById(R.id.email_editText)
+        password_editText = view.findViewById(R.id.password_editText)
+        login_button = view.findViewById(R.id.login_button)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onResume() {
+        super.onResume()
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        mAuth = Firebase.auth
+        val user = mAuth.currentUser
+
+        if (user != null && user.isEmailVerified) {
+            val intent = Intent(activity, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        val emailPassed = SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_EMAIL
+        val passwordPassed = SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_PASSWORD
+
+        if (emailPassed.isNotEmpty() && passwordPassed.isNotEmpty()) {
+            email_editText.setText(emailPassed)
+            password_editText.setText(passwordPassed)
+
+            //reset passed data
+            SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_EMAIL = ""
+            SignUpFragment.KotlinConstantClass.COMPANION_OBJECT_PASSWORD = ""
+        }
+        //init loading dialog
+        dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_loading_login)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        login_button.setOnClickListener {
+            dialog.show()
+            loginUser()
+        }
+    }
+
+    private fun loginUser() {
+        val email: String = email_editText.text.toString()
+        val password: String = password_editText.text.toString()
+        Log.d("email", email)
+        Log.d("password", password)
+
+        when {
+            TextUtils.isEmpty(email) -> {
+                email_editText.error = "Email can't be empty"
+                email_editText.requestFocus()
             }
+            TextUtils.isEmpty(password) -> {
+                password_editText.error = "Password can't be empty"
+                password_editText.requestFocus()
+            }
+            else -> {
+                mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(requireActivity()) { task ->
+                        if (task.isSuccessful) {
+                            //set delay for smooth animation
+                            val handler = Handler()
+                            handler.postDelayed({
+                                if (dialog.isShowing) {
+                                    dialog.dismiss()
+                                }
+                                // Sign in success, update UI with the signed-in user's information
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "User logged in successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val intent =
+                                    Intent(requireActivity(), ProfileActivity::class.java)
+                                startActivity(intent)
+                            }, 1000)
+//                            }
+                        } else {
+                            if (dialog.isShowing) {
+                                dialog.dismiss()
+                            }
+                            Toast.makeText(
+                                requireActivity(),
+                                "Login Error: " + task.exception,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+            }
+        }
     }
 }

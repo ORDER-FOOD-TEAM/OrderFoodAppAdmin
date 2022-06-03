@@ -22,6 +22,14 @@ class SignUpFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    class KotlinConstantClass {
+        companion object {
+            var COMPANION_OBJECT_EMAIL = ""
+            var COMPANION_OBJECT_PASSWORD = ""
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
