@@ -13,11 +13,11 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        btn_logout = findViewById(R.id.btn_logout)
+//        btn_logout = findViewById(R.id.btn_logout)
 
 
-        btn_logout.setOnClickListener(View.OnClickListener {
-            FirebaseAuth.getInstance().signOut();
-        })
+//        btn_logout.setOnClickListener(View.OnClickListener {
+//            FirebaseAuth.getInstance().signOut();
+//        })
     }
 }
