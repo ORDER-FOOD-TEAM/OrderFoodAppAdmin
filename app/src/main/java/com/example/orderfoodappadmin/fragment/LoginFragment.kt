@@ -17,6 +17,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.orderfoodappadmin.CustomDialog
 import com.example.orderfoodappadmin.R
+import com.example.orderfoodappadmin.activity.AddFoodActivity
 import com.example.orderfoodappadmin.activity.ProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -27,7 +28,7 @@ import com.google.firebase.ktx.Firebase
 class LoginFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var dialog: CustomDialog
-//  private lateinit var fusedLocationProvider: FusedLocationProviderClient
+
 
 
     //Element UI
@@ -54,27 +55,27 @@ class LoginFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
+        Log.d("Come Start", "Come Start")
 
         mAuth = Firebase.auth
         val user = mAuth.currentUser
 
         if (user != null && user.isEmailVerified) {
-            val intent = Intent(activity, ProfileActivity::class.java)
+            val intent = Intent(activity, AddFoodActivity::class.java)
             startActivity(intent)
         }
     }
 
     override fun onResume() {
         super.onResume()
-
+        Log.d("Come Start", "onResume")
         mAuth = Firebase.auth
         val user = mAuth.currentUser
 
         if (user != null) {
             Log.d("login", user.email.toString())
 
-            val intent = Intent(activity, ProfileActivity::class.java)
+            val intent = Intent(activity, AddFoodActivity::class.java)
             startActivity(intent)
         }
 
@@ -118,7 +119,7 @@ class LoginFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 val intent =
-                                    Intent(requireActivity(), ProfileActivity::class.java)
+                                    Intent(requireActivity(), AddFoodActivity::class.java)
                                 startActivity(intent)
                             }, 1000)
 //                            }
