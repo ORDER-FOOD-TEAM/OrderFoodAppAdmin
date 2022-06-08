@@ -40,7 +40,7 @@ class SignUpFragment : Fragment() {
     lateinit var name_edittext: EditText
     lateinit var shopName_editText: EditText
     lateinit var phoneNumber_editText: EditText
-    lateinit var address_editText: EditText
+
     lateinit var signup_button: Button
 
 
@@ -74,7 +74,7 @@ class SignUpFragment : Fragment() {
         confirmPassword_editText = view.findViewById(R.id.confirmPassword_editText)
         shopName_editText = view.findViewById(R.id.shopName_editText)
         phoneNumber_editText = view.findViewById(R.id.phoneNumber_editText)
-        address_editText = view.findViewById(R.id.address_editText)
+
         signup_button = view.findViewById(R.id.signup_button)
         return view
     }
@@ -97,7 +97,7 @@ class SignUpFragment : Fragment() {
         val confirmPassword: String = confirmPassword_editText.text.toString()
         val name = shopName_editText.text.toString()
         val phoneNum = phoneNumber_editText.text.toString()
-        val address = address_editText.text.toString()
+        val address = "Quận 6, Hồ Chí Minh"
         when {
             TextUtils.isEmpty(email) -> {
                 email_editText.error = "Email can't be empty"

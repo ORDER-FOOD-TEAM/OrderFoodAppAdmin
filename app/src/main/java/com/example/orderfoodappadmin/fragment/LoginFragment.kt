@@ -29,8 +29,6 @@ class LoginFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var dialog: CustomDialog
 
-
-
     //Element UI
     lateinit var email_editText: EditText
     lateinit var password_editText: EditText

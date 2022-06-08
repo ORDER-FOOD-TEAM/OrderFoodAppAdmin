@@ -13,10 +13,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.orderfoodappadmin.R
+import com.example.orderfoodappadmin.activity.FoodDetail
 import com.example.orderfoodappadmin.model.Dish
-import com.example.orderfoodappforenterprise.FoodDetail
-import com.example.orderfoodappforenterprise.R
-import com.example.orderfoodappforenterprise.model.Dish
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -106,11 +104,11 @@ class DishAdapter (
             amountM_value.text = curDish.amountM.toString()
             amountL_value.text = curDish.amountL.toString()
 
-            delete_button.setOnClickListener {
-                deleteItem(position)
-                deleteDish(curDish)
-
-            }
+//            delete_button.setOnClickListener {
+//                deleteItem(position)
+//                deleteDish(curDish)
+//
+//            }
 
             foodImage_imageView.setOnClickListener {
                 val intent = Intent(context, FoodDetail::class.java)

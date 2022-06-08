@@ -73,7 +73,7 @@
             android:background="@drawable/bg_input_edit_text"
             android:drawableLeft="@drawable/ic_multiple_user"
             android:drawablePadding="12dp"
-            android:hint="Shop's Name"
+            android:hint="Staff Name"
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
@@ -92,23 +92,6 @@
             android:drawablePadding="12dp"
             android:hint="Phone number"
             android:inputType="textEmailAddress"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp" />
-
-        <EditText
-            android:id="@+id/address_editText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/bg_input_edit_text"
-            android:drawableLeft="@drawable/ic_add_location"
-            android:drawablePadding="12dp"
-            android:hint="Address"
-            android:inputType="none"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
 

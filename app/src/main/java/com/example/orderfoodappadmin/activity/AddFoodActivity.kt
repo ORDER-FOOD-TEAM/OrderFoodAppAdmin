@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.*
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -93,8 +94,9 @@ class AddFoodActivity : AppCompatActivity() {
 
         findProviderID()
 
+
         //set data for type of food combobox
-        val listOption = arrayListOf("All food", "Starchy food", "Drinking", "Asian")
+        val listOption = arrayListOf("All food", "Pizza", "Drinking", "Hamburger")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOption)
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice)
         type_of_food_option.adapter = adapter
@@ -131,6 +133,7 @@ class AddFoodActivity : AppCompatActivity() {
     }
 
     private fun addFood() {
+
         try {
             val name = food_name_editText.text.toString()
             val type = type_of_food_option.selectedItem.toString()
@@ -174,6 +177,7 @@ class AddFoodActivity : AppCompatActivity() {
 
                 dbRef.child(key).setValue(newDish)
                 uploadImage(key)
+                clearText()
                 Toast.makeText(this, "Add to menu successfully!", Toast.LENGTH_LONG).show()
             }
         } catch (e: Exception) {
@@ -196,13 +200,15 @@ class AddFoodActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 100 && resultCode == RESULT_OK) {
+        if (requestCode == 100 && resultCode == RESULT_OK) {
             imageUri = data?.data!!
             image_food.setImageURI(imageUri)
         }
     }
+
     private fun findProviderID() {
         val providerEmail = Firebase.auth.currentUser?.email.toString()
+        Log.d("BBB", "Email" + providerEmail)
         val dbRef = FirebaseDatabase.getInstance()
             .getReference("Provider")
             .orderByChild("email")
@@ -210,6 +216,7 @@ class AddFoodActivity : AppCompatActivity() {
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (data in snapshot.children) {
+                    Log.d("BBB", data.key.toString())
                     providerID = data.key.toString()
                 }
             }
