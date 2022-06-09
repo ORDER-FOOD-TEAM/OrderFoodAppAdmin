@@ -48,7 +48,8 @@ class AllOrderFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 allOrderAdapter.deleteAll()
                 for (data in snapshot.children) {
-                    if ( data.child("status").value?.equals("In cart") != true) {
+                    if ( data.child("status").value?.equals("In cart") != true
+                        && data.child("status").value?.equals("Pending") == true) {
                         var total = 0.0
                         val a: Any = data.child("total").value as Any
                         val type = a::class.simpleName

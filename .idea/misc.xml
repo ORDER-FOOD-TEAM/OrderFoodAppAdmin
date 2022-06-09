@@ -33,9 +33,12 @@
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/activity_profile.xml" value="0.20989583333333334" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/dialog_loading_login.xml" value="0.2760416666666667" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/food_item.xml" value="0.240625" />
+        <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_accept_order.xml" value="0.3145833333333333" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_all_order.xml" value="0.2328125" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_all_orders.xml" value="0.27291666666666664" />
+        <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_decline_order.xml" value="0.3145833333333333" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_decline_order_adapter.xml" value="0.31666666666666665" />
+        <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_done_order.xml" value="0.3145833333333333" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/fragment_sign_up.xml" value="0.253125" />
         <entry key="..\:/HK2/OrderFoodAppAdmin/app/src/main/res/layout/ic_arrow_back.xml" value="0.1984375" />
