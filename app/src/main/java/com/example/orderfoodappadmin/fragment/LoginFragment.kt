@@ -18,6 +18,7 @@ import android.widget.Toast
 import com.example.orderfoodappadmin.CustomDialog
 import com.example.orderfoodappadmin.R
 import com.example.orderfoodappadmin.activity.AddFoodActivity
+import com.example.orderfoodappadmin.activity.OrdersActivity
 import com.example.orderfoodappadmin.activity.ProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -59,7 +60,7 @@ class LoginFragment : Fragment() {
         val user = mAuth.currentUser
 
         if (user != null && user.isEmailVerified) {
-            val intent = Intent(activity, ProfileActivity::class.java)
+            val intent = Intent(activity, OrdersActivity::class.java)
             startActivity(intent)
         }
     }
@@ -73,7 +74,7 @@ class LoginFragment : Fragment() {
         if (user != null) {
             Log.d("login", user.email.toString())
 
-            val intent = Intent(activity, ProfileActivity::class.java)
+            val intent = Intent(activity, OrdersActivity::class.java)
             startActivity(intent)
         }
 
@@ -117,7 +118,7 @@ class LoginFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 val intent =
-                                    Intent(requireActivity(), ProfileActivity::class.java)
+                                    Intent(requireActivity(), OrdersActivity::class.java)
                                 startActivity(intent)
                             }, 1000)
 //                            }
