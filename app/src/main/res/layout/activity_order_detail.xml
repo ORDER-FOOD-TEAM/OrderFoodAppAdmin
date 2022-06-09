@@ -1,342 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.OrderDetail">
+    android:orientation="horizontal">
 
 
-    <!--    Back Button-->
-    <LinearLayout
-        android:id="@+id/back_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:background="@drawable/bg_white_circle"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.OrderDetail">
 
-        <ImageView
-            android:id="@+id/back_button"
+
+        <!--    Back Button-->
+        <LinearLayout
+            android:id="@+id/back_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginLeft="9dp"
-            android:contentDescription="btnBack"
-            app:srcCompat="@drawable/ic_arrow_back" />
+            android:layout_margin="30dp"
+            android:background="@drawable/bg_white_circle"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginLeft="9dp"
+                android:contentDescription="btnBack"
+                app:srcCompat="@drawable/ic_arrow_back" />
 
-    <LinearLayout
-        android:id="@+id/delete_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:background="@drawable/bg_white_circle"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/delete_button"
+        <LinearLayout
+            android:id="@+id/delete_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginLeft="9dp"
-            android:contentDescription="btnBack"
-            app:srcCompat="@drawable/ic_delete_gray"
-            android:visibility="visible"/>
+            android:layout_margin="30dp"
+            android:background="@drawable/bg_white_circle"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
-    <!-- Title-->
-    <TextView
-        android:id="@+id/title_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:layout_marginTop="28dp"
-        android:text="Order Detail"
-        android:textColor="@color/orange_main"
-        android:textSize="35sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!--    Day -->
-    <TextView
-        android:id="@+id/date_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wed, 7 Jun 2021"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_order" />
-    <!--List Item-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/billDetail_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_textView" />
-    <!--Line -->
-    <TextView
-        android:id="@+id/line_text1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/billDetail_recyclerView" />
-    <!--    Sub    -->
-    <TextView
-        android:id="@+id/sub_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:text="Subtotal"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_text1" />
+            <ImageView
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginLeft="9dp"
+                android:contentDescription="btnBack"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_delete_gray" />
 
-    <TextView
-        android:id="@+id/sub_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:text="$0.00"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_text1" />
+        </LinearLayout>
+        <!-- Title-->
+        <TextView
+            android:id="@+id/title_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginTop="28dp"
+            android:text="Order Detail"
+            android:textColor="@color/orange_main"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--    Day -->
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wed, 7 Jun 2021"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.463"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_order" />
+        <!--List Item-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingHorizontal="50dp"
+            android:id="@+id/billDetail_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_text" />
+        <!--Line -->
+        <TextView
+            android:id="@+id/line_text1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/billDetail_recyclerView" />
+        <!--    Sub    -->
+        <TextView
+            android:id="@+id/sub_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:text="Subtotal"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_text1" />
 
-    <TextView
-        android:id="@+id/coupon_titile_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Coupon"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sub_txt" />
+        <TextView
+            android:id="@+id/sub_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="50dp"
+            android:text="$0.00"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_text1" />
 
-
-    <TextView
-        android:id="@+id/coupon_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sub_text" />
-
-    <TextView
-        android:id="@+id/deliveryFee_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Delivery fee"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coupon_titile_text" />
-
-    <TextView
-        android:id="@+id/deliveryFee_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:text="$0.00"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coupon_text" />
+        <TextView
+            android:id="@+id/coupon_titile_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Coupon"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sub_txt" />
 
 
-    <TextView
-        android:id="@+id/total_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Total"
-        android:textColor="@color/orange_main"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deliveryFee_title_text" />
+        <TextView
+            android:id="@+id/coupon_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sub_text" />
 
-    <TextView
-        android:id="@+id/total_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:text="$0.00"
-        android:textColor="@color/orange_main"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deliveryFee_text" />
+        <TextView
+            android:id="@+id/deliveryFee_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Delivery fee"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coupon_titile_text" />
+
+        <TextView
+            android:id="@+id/deliveryFee_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:text="$0.00"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coupon_text" />
 
 
-    <!--Line text 2-->
-    <TextView
-        android:id="@+id/line_text2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/billDetail_recyclerView" />
+        <TextView
+            android:id="@+id/total_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Total"
+            android:textColor="@color/orange_main"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryFee_title_text" />
 
-    <!--    Order infomation-->
-    <TextView
-        android:id="@+id/orderid_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:text="Order ID"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_text2" />
+        <TextView
+            android:id="@+id/total_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:text="$0.00"
+            android:textColor="@color/orange_main"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deliveryFee_text" />
 
-    <TextView
-        android:id="@+id/orderid_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_text2" />
-    <!--    Customer name-->
-    <TextView
-        android:id="@+id/name_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderid_title_text" />
 
-    <TextView
-        android:id="@+id/name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderid_text" />
+        <!--Line text 2-->
+        <TextView
+            android:id="@+id/line_text2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="175dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/billDetail_recyclerView" />
 
-    <!--    Phone Info-->
-    <TextView
-        android:id="@+id/phone_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Phone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_title_text" />
+        <!--    Order infomation-->
+        <TextView
+            android:id="@+id/orderid_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:text="Order ID"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_text2" />
 
-    <TextView
-        android:id="@+id/phone_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_text" />
+        <TextView
+            android:id="@+id/orderid_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_text2" />
+        <!--    Customer name-->
+        <TextView
+            android:id="@+id/name_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderid_title_text" />
 
-    <!--    Address-->
+        <TextView
+            android:id="@+id/name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderid_text" />
 
-    <TextView
-        android:id="@+id/address_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Address"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_title_text" />
+        <!--    Phone Info-->
+        <TextView
+            android:id="@+id/phone_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_title_text" />
 
-    <TextView
-        android:id="@+id/address_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_text" />
+        <TextView
+            android:id="@+id/phone_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_text" />
 
-    <!--    Status  Info  -->
-    <TextView
-        android:id="@+id/status_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Status"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/address_title_text" />
+        <!--    Address-->
 
-    <TextView
-        android:id="@+id/status_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/address_text" />
+        <TextView
+            android:id="@+id/address_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_title_text" />
 
-<androidx.appcompat.widget.AppCompatButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Decline"
- android:paddingHorizontal="25dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
-    android:layout_marginStart="80dp"
-    android:textColor="@color/white"
-    android:background="@drawable/btn_decline"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/status_title_text"/>
+        <TextView
+            android:id="@+id/address_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_text" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accept"
-        android:layout_marginTop="20dp"
-        android:paddingHorizontal="25dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="80dp"
-        android:background="@drawable/btn_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/status_text"/>
+        <!--    Status  Info  -->
+        <TextView
+            android:id="@+id/status_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/address_title_text" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/address_text" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/decline_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_decline"
+            android:paddingHorizontal="25dp"
+            android:text="Decline"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_title_text" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/accept_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_login"
+            android:paddingHorizontal="25dp"
+            android:text="Accept"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

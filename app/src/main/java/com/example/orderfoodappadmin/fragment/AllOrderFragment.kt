@@ -34,6 +34,53 @@ class AllOrderFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_all_order, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val dbRef = FirebaseDatabase.getInstance().getReference("Bill")
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                allOrderAdapter.deleteAll()
+                for (data in snapshot.children) {
+                    if ( data.child("status").value?.equals("In cart") != true
+                        && data.child("status").value?.equals("Pending") == true) {
+                        var total = 0.0
+                        val a: Any = data.child("total").value as Any
+                        val type = a::class.simpleName
+                        if(type == "Long" || type == "Double")
+                            total = a.toString().toDouble()
+                        val status = data.child("status").value.toString();
+                        val customerEmail = data.child("customerEmail").value.toString();
+                        val dbRef2 = FirebaseDatabase.getInstance().getReference("Bill/${data.key}/products")
+                        dbRef2.get().addOnSuccessListener {
+                            val count = it.childrenCount.toInt()
+
+                            val date = sdf1.parse(data.child("time").value as String)
+                            val formattedDate = sdf2.format(date)
+
+                            val order = Order(
+                                data.key.toString(),
+                                total,
+                                count,
+                                formattedDate,
+                                status,
+                                customerEmail
+                            )
+                            allOrderAdapter.addOrder(order)
+                        }
+
+                    }
+                }
+                //set animation
+                val layoutAnim = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_anim_left_to_right)
+                rvOrderList.layoutAnimation = layoutAnim
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +103,7 @@ class AllOrderFragment : Fragment() {
                         if(type == "Long" || type == "Double")
                             total = a.toString().toDouble()
                         val status = data.child("status").value.toString();
+                        val customerEmail = data.child("customerEmail").value.toString();
                         val dbRef2 = FirebaseDatabase.getInstance().getReference("Bill/${data.key}/products")
                         dbRef2.get().addOnSuccessListener {
                             val count = it.childrenCount.toInt()
@@ -68,7 +116,8 @@ class AllOrderFragment : Fragment() {
                                 total,
                                 count,
                                 formattedDate,
-                                status
+                                status,
+                                customerEmail
                             )
                             allOrderAdapter.addOrder(order)
                         }

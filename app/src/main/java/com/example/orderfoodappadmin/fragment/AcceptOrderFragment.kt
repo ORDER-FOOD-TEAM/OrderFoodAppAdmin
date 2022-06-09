@@ -35,6 +35,7 @@ class AcceptOrderFragment : Fragment() {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         acceptOrderAdapter = AllOrderAdapter(mutableListOf())
@@ -56,6 +57,7 @@ class AcceptOrderFragment : Fragment() {
                         if(type == "Long" || type == "Double")
                             total = a.toString().toDouble()
                         val status = data.child("status").value.toString();
+                        val customerEmail = data.child("customerEmail").value.toString();
                         val dbRef2 = FirebaseDatabase.getInstance().getReference("Bill/${data.key}/products")
                         dbRef2.get().addOnSuccessListener {
                             val count = it.childrenCount.toInt()
@@ -68,7 +70,8 @@ class AcceptOrderFragment : Fragment() {
                                 total,
                                 count,
                                 formattedDate,
-                                status
+                                status,
+                                customerEmail
                             )
                             acceptOrderAdapter.addOrder(order)
                         }

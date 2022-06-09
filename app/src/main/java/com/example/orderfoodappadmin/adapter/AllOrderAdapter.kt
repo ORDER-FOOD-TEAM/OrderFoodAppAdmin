@@ -69,6 +69,8 @@ class AllOrderAdapter(
             setOnClickListener {
                 val intent = Intent(context, OrderDetail::class.java)
                 intent.putExtra("id", curOrder.id)
+                intent.putExtra("status", curOrder.status)
+                intent.putExtra("customerEmail", curOrder.customerEmail)
                 context.startActivities(arrayOf(intent))
             }
         }
