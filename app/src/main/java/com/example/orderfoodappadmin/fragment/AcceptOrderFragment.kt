@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.orderfoodapp.adapters.AllOrderAdapter
+import com.example.orderfoodappadmin.CustomDialog
 import com.example.orderfoodappadmin.R
 import com.example.orderfoodappadmin.model.Order
 import com.google.firebase.database.DataSnapshot
@@ -22,9 +23,11 @@ class AcceptOrderFragment : Fragment() {
     private lateinit var acceptOrderAdapter: AllOrderAdapter
     private val sdf1 = SimpleDateFormat("yyyy-MM-dd")
     private val sdf2 = SimpleDateFormat("EEE, d MMM yyyy")
+    private lateinit var dialog:CustomDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dialog = CustomDialog(requireContext())
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,20 +37,17 @@ class AcceptOrderFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_all_order, container, false)
     }
 
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        acceptOrderAdapter = AllOrderAdapter(mutableListOf())
-        rvOrderList.adapter = acceptOrderAdapter
-
-        val layoutManager = LinearLayoutManager(context)
-        rvOrderList.layoutManager = layoutManager
-
+    override fun onPause() {
+        super.onPause()
+        acceptOrderAdapter.deleteAll()
+    }
+    override fun onResume() {
+        super.onResume()
         val dbRef = FirebaseDatabase.getInstance().getReference("Bill")
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 acceptOrderAdapter.deleteAll()
+                dialog.show()
                 for (data in snapshot.children) {
                     if ( data.child("status").value?.equals("In cart") != true
                         && data.child("status").value?.equals("Accept") == true) {
@@ -78,6 +78,9 @@ class AcceptOrderFragment : Fragment() {
 
                     }
                 }
+                if(dialog.isShowing()){
+                    dialog.dismiss()
+                }
                 //set animation
                 val layoutAnim = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_anim_left_to_right)
                 rvOrderList.layoutAnimation = layoutAnim
@@ -88,6 +91,17 @@ class AcceptOrderFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        acceptOrderAdapter = AllOrderAdapter(mutableListOf())
+        rvOrderList.adapter = acceptOrderAdapter
+
+        val layoutManager = LinearLayoutManager(context)
+        rvOrderList.layoutManager = layoutManager
+
+
 
     }
 

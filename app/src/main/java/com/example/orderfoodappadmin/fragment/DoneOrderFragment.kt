@@ -34,15 +34,12 @@ class DoneOrderFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_all_order, container, false)
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        doneOrderAdapter = AllOrderAdapter(mutableListOf())
-        rvOrderList.adapter = doneOrderAdapter
-
-        val layoutManager = LinearLayoutManager(context)
-        rvOrderList.layoutManager = layoutManager
-
+    override fun onPause() {
+        super.onPause()
+        doneOrderAdapter.deleteAll()
+    }
+    override fun onResume() {
+        super.onResume()
         val dbRef = FirebaseDatabase.getInstance().getReference("Bill")
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -87,6 +84,16 @@ class DoneOrderFragment : Fragment() {
             }
 
         })
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        doneOrderAdapter = AllOrderAdapter(mutableListOf())
+        rvOrderList.adapter = doneOrderAdapter
+
+        val layoutManager = LinearLayoutManager(context)
+        rvOrderList.layoutManager = layoutManager
+
+
 
     }
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.orderfoodappadmin.CustomDialog
@@ -57,11 +58,16 @@ class OrderDetail : AppCompatActivity() {
 
 
 
-        if (status == "Decline" || status == "Accept" || status == "Done") {
+        if ( status == "Accept" ) {
             decline_btn.visibility = View.INVISIBLE
             accept_btn.visibility = View.INVISIBLE
+            done_btn.visibility = View.VISIBLE
+            delete_order.visibility = View.INVISIBLE
         } else if (status == "Pending") {
             delete_order.visibility = View.INVISIBLE
+        } else {
+            decline_btn.visibility = View.INVISIBLE
+            accept_btn.visibility = View.INVISIBLE
         }
         back_layout.setOnClickListener() {
             finish()
@@ -75,17 +81,59 @@ class OrderDetail : AppCompatActivity() {
             updateAcceptOrderStatus()
             finish()
         }
+        delete_order.setOnClickListener() {
+            deleteDeclineOrderStatus()
+            finish()
+        }
+        done_btn.setOnClickListener(){
+            doneDeclineOrderStatus()
+            finish()
+        }
     }
 
     private fun updateDeclineOrderStatus() {
 
         val dbRef = FirebaseDatabase.getInstance().getReference("Bill/$id")
         dbRef.child("status").setValue("Decline")
+
+        Toast.makeText(
+            applicationContext,
+            "Update status successfully",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun deleteDeclineOrderStatus() {
+
+        val dbRef = FirebaseDatabase.getInstance().getReference("Bill/$id")
+        dbRef.child("status").setValue("Deleted")
+
+        Toast.makeText(
+            applicationContext,
+            "Delete order successfully",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+    private fun doneDeclineOrderStatus() {
+
+        val dbRef = FirebaseDatabase.getInstance().getReference("Bill/$id")
+        dbRef.child("status").setValue("Done")
+
+        Toast.makeText(
+            applicationContext,
+            "Order has been shipped",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun updateAcceptOrderStatus() {
         val dbRef = FirebaseDatabase.getInstance().getReference("Bill/$id")
         dbRef.child("status").setValue("Accept")
+        Toast.makeText(
+            applicationContext,
+            "Update status successfully",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun displayProducts() {
@@ -105,9 +153,7 @@ class OrderDetail : AppCompatActivity() {
                 )
                 billAdapter.addBill(bill)
             }
-
         }
-
     }
 
 

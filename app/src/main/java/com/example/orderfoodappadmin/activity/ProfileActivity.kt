@@ -44,6 +44,11 @@ class ProfileActivity : AppCompatActivity() {
 //                    val intent = Intent(Intent(this, AnalyzeActivity::class.java))
 //                    startActivity(intent)
 //                }
+                R.id.orders -> {
+                    Toast.makeText(applicationContext, "Come here order", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(Intent(this, OrdersActivity::class.java))
+                    startActivity(intent)
+                }
             }
             true
         }

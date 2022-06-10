@@ -9,6 +9,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
         tools:context=".activity.OrderDetail">
 
 
@@ -320,7 +321,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/address_text" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/decline_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -332,9 +333,9 @@
             android:text="Decline"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/status_title_text" />
-
-        <androidx.appcompat.widget.AppCompatButton
+            app:layout_constraintTop_toBottomOf="@id/status_title_text"
+            app:backgroundTint="@null" />
+        <Button
             android:id="@+id/accept_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -345,7 +346,23 @@
             android:paddingHorizontal="25dp"
             android:text="Accept"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/status_text" />
+            app:layout_constraintTop_toBottomOf="@id/status_text"
+            android:visibility="visible"
+            app:backgroundTint="@null" />
 
+        <Button
+            android:id="@+id/done_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_text"
+            android:text="Done"
+            app:backgroundTint="@null"
+            android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

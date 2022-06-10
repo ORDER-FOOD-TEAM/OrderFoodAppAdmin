@@ -34,20 +34,20 @@ class DeclineOrderFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_all_order, container, false)
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        declineOrderAdapter = AllOrderAdapter(mutableListOf())
-        rvOrderList.adapter = declineOrderAdapter
-
+    override fun onPause() {
+        super.onPause()
+        declineOrderAdapter.deleteAll()
+    }
+    override fun onResume() {
+        super.onResume()
         val layoutManager = LinearLayoutManager(context)
         rvOrderList.layoutManager = layoutManager
-
         val dbRef = FirebaseDatabase.getInstance().getReference("Bill")
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 declineOrderAdapter.deleteAll()
                 for (data in snapshot.children) {
+
                     if ( data.child("status").value?.equals("In cart") != true
                         && data.child("status").value?.equals("Decline") == true) {
                         var total = 0.0
@@ -87,6 +87,15 @@ class DeclineOrderFragment : Fragment() {
             }
 
         })
+
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        declineOrderAdapter = AllOrderAdapter(mutableListOf())
+        rvOrderList.adapter = declineOrderAdapter
+
+
+
 
     }
 
