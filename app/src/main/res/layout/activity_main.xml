@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-light"
-            android:text="Yummyyyy"
+            android:text="Pizza University"
             android:textColor="@color/black"
             android:textSize="33sp" />
 
@@ -41,7 +41,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/login_tab_layout"
             android:layout_width="match_parent"
-            app:tabSelectedTextColor="@color/orange_main"
+            app:tabSelectedTextColor="@color/baemin"
             android:layout_height="wrap_content">
         </com.google.android.material.tabs.TabLayout>
 

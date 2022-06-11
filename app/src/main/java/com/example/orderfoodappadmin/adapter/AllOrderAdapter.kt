@@ -47,9 +47,9 @@ class AllOrderAdapter(
             order_date.text = curOrder.time
 
             var color: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                context.getColor(R.color.orange_main)
+                context.getColor(R.color.baemin)
             } else {
-                resources.getColor(R.color.orange_main)
+                resources.getColor(R.color.baemin)
             };
             when (curOrder.status) {
                 "Pending" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -60,7 +60,7 @@ class AllOrderAdapter(
                 }
 
                 else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    color = context.getColor(R.color.orange_main)
+                    color = context.getColor(R.color.baemin)
                 }
             }
 

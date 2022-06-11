@@ -64,7 +64,7 @@
             android:layout_margin="30dp"
             android:layout_marginTop="28dp"
             android:text="Order Detail"
-            android:textColor="@color/orange_main"
+            android:textColor="@color/baemin"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -185,7 +185,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="8dp"
             android:text="Total"
-            android:textColor="@color/orange_main"
+            android:textColor="@color/baemin"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deliveryFee_title_text" />
@@ -197,7 +197,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="50dp"
             android:text="$0.00"
-            android:textColor="@color/orange_main"
+            android:textColor="@color/baemin"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deliveryFee_text" />

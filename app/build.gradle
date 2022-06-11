@@ -67,4 +67,7 @@ dependencies {
     //Anycharts
     implementation 'com.github.anychart:anychart-android:1.1.2'
 
+//swipe action
+    implementation 'com.github.niklasdahlheimer:SwipeRevealLayout:1.6.0'
+
 }

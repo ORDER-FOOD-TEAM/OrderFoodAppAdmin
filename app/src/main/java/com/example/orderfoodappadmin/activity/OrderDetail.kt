@@ -192,7 +192,7 @@ class OrderDetail : AppCompatActivity() {
                     status_text.setTextColor(getColor(R.color.red))
                 }
                 else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    status_text.setTextColor(getColor(R.color.orange_main))
+                    status_text.setTextColor(getColor(R.color.baemin))
                 }
 
             }

@@ -1,20 +1,34 @@
 package com.example.orderfoodappadmin.activity
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.orderfoodappadmin.MainActivity
 import com.example.orderfoodappadmin.R
 import com.example.orderfoodappadmin.adapter.DishAdapter
+import com.example.orderfoodappadmin.model.Dish
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import java.io.File
+
+
 
 class ProfileActivity : AppCompatActivity() {
     private var providerKey = ""
@@ -25,14 +39,34 @@ class ProfileActivity : AppCompatActivity() {
     private var dishesId = mutableListOf<String>()
     private lateinit var mAuth: FirebaseAuth
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        mAuth = Firebase.auth
+        val user = mAuth.currentUser
+
+        GlobalScope.launch {
+            val loadProviderId = async { loadProviderId(user?.email!!) }
+            MainActivity.KotlinConstantClass.PROVIDER_ID = loadProviderId.await()
+
+            val loadDishes = async { loadDishes() }
+            loadDishes.await()
+        }
+
+        dishAdapter = DishAdapter(mutableListOf())
+        allFood_recyclerView.adapter = dishAdapter
+        val layoutManager = LinearLayoutManager(this)
+        allFood_recyclerView.layoutManager = layoutManager
+
+        //Sidebar menu
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         navView_profile.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.add_food -> startActivity(Intent(this, AddFoodActivity::class.java))
-//                R.id.edit_profile -> startActivity(Intent(this, EditProfileActivity::class.java))
+                R.id.edit_profile -> startActivity(Intent(this, EditProfileActivity::class.java))
                 R.id.sign_out -> {
                     Firebase.auth.signOut()
                     val i = Intent(this, MainActivity::class.java)
@@ -40,13 +74,8 @@ class ProfileActivity : AppCompatActivity() {
                     startActivity(i)
                     Toast.makeText(applicationContext, "Sign out", Toast.LENGTH_SHORT).show()
                 }
-//                R.id.statistical -> {
-//                    val intent = Intent(Intent(this, AnalyzeActivity::class.java))
-//                    startActivity(intent)
-//                }
-                R.id.orders -> {
-                    Toast.makeText(applicationContext, "Come here order", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(Intent(this, OrdersActivity::class.java))
+                R.id.statistical -> {
+                    val intent = Intent(Intent(this, AnalyzeActivity::class.java))
                     startActivity(intent)
                 }
             }
@@ -57,5 +86,109 @@ class ProfileActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
+        displayProvider()
+
+        println(providerId)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)){
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun displayProvider() {
+        val customerEmail = Firebase.auth.currentUser?.email.toString()
+        email_textView.text = customerEmail
+
+        val dbRef = FirebaseDatabase.getInstance().getReference("Provider")
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children) {
+                    if(data.child("email").value as String == customerEmail) {
+                        providerKey = data.key.toString()
+                        name_textView.text = data.child("name").value as String
+                        address_textView.text = data.child("location").value as String
+                        displayAllFood()
+                        break
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@ProfileActivity, "Cannot load customer's data, please try later!", Toast.LENGTH_LONG).show()
+            }
+
+        })
+
+        val imgName = customerEmail.replace(".", "_")
+        val storageRef = FirebaseStorage.getInstance().getReference("avatar_image/$imgName.jpg")
+    }
+
+    private fun displayAllFood() {
+        val dbRef = FirebaseDatabase.getInstance().getReference("Product")
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                dishAdapter.deleteAll()
+                var count = 0
+                for(data in snapshot.children) {
+                    if(data.child("provider").value as String == providerKey) {
+                        val item = data.getValue(Dish::class.java)
+                        if (item != null) {
+                            dishAdapter.addDish(item)
+                            count++
+                        }
+                    }
+                }
+                post_amount.text = count.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+    private suspend fun loadProviderId(providerEmail: String): String  = coroutineScope{
+        var providerId = ""
+        //get providerId
+        val dbRef = FirebaseDatabase.getInstance().getReference("Provider").orderByChild("email").equalTo(providerEmail)
+        dbRef.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(childBranch in snapshot.children){
+                    MainActivity.KotlinConstantClass.PROVIDER_ID = childBranch.key.toString()
+                    providerId = childBranch.key.toString()
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        return@coroutineScope providerId
+    }
+
+    private suspend fun loadDishes() = coroutineScope{
+        val dbRef = FirebaseDatabase.getInstance().getReference("Product")
+
+        dbRef.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                MainActivity.KotlinConstantClass.DISHES_ID.removeAll(MainActivity.KotlinConstantClass.DISHES_ID)
+
+                for(childBranch in snapshot.children){
+                    if (childBranch.child("provider").value.toString() == MainActivity.KotlinConstantClass.PROVIDER_ID){
+                        MainActivity.KotlinConstantClass.DISHES_ID.add(
+                            childBranch.child("id").value.toString()
+                        )
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }
