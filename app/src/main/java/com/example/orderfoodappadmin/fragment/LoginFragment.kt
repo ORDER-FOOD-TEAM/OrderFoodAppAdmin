@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
         val user = mAuth.currentUser
 
         if (user != null && user.isEmailVerified) {
-            val intent = Intent(activity, FoodDetail::class.java)
+            val intent = Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
         }
     }
@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
         if (user != null) {
             Log.d("login", user.email.toString())
 
-            val intent = Intent(activity, FoodDetail::class.java)
+            val intent = Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
         }
 
