@@ -40,7 +40,7 @@ class OrdersActivity : AppCompatActivity() {
         navView_orders.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home_page -> startActivity(Intent(this, ProfileActivity::class.java))
-//                R.id.edit_profile -> startActivity(Intent(this, EditProfileActivity::class.java))
+//              R.id.edit_profile -> startActivity(Intent(this, EditProfileActivity::class.java))
                 R.id.sign_out -> {
                     Firebase.auth.signOut()
                     val i = Intent(this, MainActivity::class.java)
