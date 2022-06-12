@@ -63,9 +63,6 @@ class AddFoodActivity : AppCompatActivity() {
         price_s_size = findViewById(R.id.price_s_size)
         price_m_size = findViewById(R.id.price_m_size)
         price_l_size = findViewById(R.id.price_l_size)
-        amount_s_size = findViewById(R.id.amount_s_size)
-        amount_m_size = findViewById(R.id.amount_m_size)
-        amount_l_size = findViewById(R.id.amount_l_size)
         image_food = findViewById(R.id.image_food)
         description_edit_text = findViewById(R.id.description_edit_text)
 
@@ -79,6 +76,10 @@ class AddFoodActivity : AppCompatActivity() {
                     i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(i)
                     Toast.makeText(applicationContext, "Sign out", Toast.LENGTH_SHORT).show()
+                }
+                R.id.statistical -> {
+                    val intent = Intent(Intent(this, AnalyzeActivity::class.java))
+                    startActivity(intent)
                 }
                 R.id.orders -> {
                     val intent = Intent(Intent(this, OrdersActivity::class.java))
@@ -165,11 +166,11 @@ class AddFoodActivity : AppCompatActivity() {
                     type,
                     description,
                     sale,
-                    amountS,
                     0L,
-                    amountM,
                     0L,
-                    amountL,
+                    0L,
+                    0L,
+                    0L,
                     0L,
                     providerID
                 )
