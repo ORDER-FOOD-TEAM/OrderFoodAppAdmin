@@ -60,8 +60,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/orders_view_pager"
                 app:layout_constraintTop_toBottomOf="@+id/textview_orders"
-                app:tabSelectedTextColor="@color/orange_main"
-                app:tabIndicatorColor="@color/orange_main"/>
+                app:tabSelectedTextColor="@color/baemin"
+                app:tabIndicatorColor="@color/baemin"/>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/orders_view_pager"
