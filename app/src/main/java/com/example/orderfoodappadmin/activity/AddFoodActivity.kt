@@ -80,6 +80,10 @@ class AddFoodActivity : AppCompatActivity() {
                     startActivity(i)
                     Toast.makeText(applicationContext, "Sign out", Toast.LENGTH_SHORT).show()
                 }
+                R.id.statistical -> {
+                    val intent = Intent(Intent(this, AnalyzeActivity::class.java))
+                    startActivity(intent)
+                }
                 R.id.orders -> {
                     val intent = Intent(Intent(this, OrdersActivity::class.java))
                     startActivity(intent)
@@ -165,11 +169,11 @@ class AddFoodActivity : AppCompatActivity() {
                     type,
                     description,
                     sale,
-                    amountS,
                     0L,
-                    amountM,
                     0L,
-                    amountL,
+                    0L,
+                    0L,
+                    0L,
                     0L,
                     providerID
                 )

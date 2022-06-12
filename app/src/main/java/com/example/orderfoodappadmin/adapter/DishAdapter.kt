@@ -2,15 +2,9 @@ package com.example.orderfoodappadmin.adapter
 
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.Button
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.orderfoodappadmin.R
 import com.example.orderfoodappadmin.activity.FoodDetail
@@ -100,9 +94,9 @@ class DishAdapter (
         holder.itemView.apply {
             foodName_textView.text = curDish.name
             star_rating_text.text = curDish.rated
-            amountS_value.text = curDish.amountS.toString()
-            amountM_value.text = curDish.amountM.toString()
-            amountL_value.text = curDish.amountL.toString()
+            priceS_value.text = "$" + curDish.priceS.toString()
+            priceM_value.text = "$" + curDish.priceM.toString()
+            priceL_value.text = "$" +  curDish.priceL.toString()
 
 //            delete_button.setOnClickListener {
 //                deleteItem(position)

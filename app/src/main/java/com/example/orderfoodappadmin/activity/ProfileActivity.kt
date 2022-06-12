@@ -181,11 +181,9 @@ class ProfileActivity : AppCompatActivity() {
                 MainActivity.KotlinConstantClass.DISHES_ID.removeAll(MainActivity.KotlinConstantClass.DISHES_ID)
 
                 for(childBranch in snapshot.children){
-                    if (childBranch.child("provider").value.toString() == MainActivity.KotlinConstantClass.PROVIDER_ID){
                         MainActivity.KotlinConstantClass.DISHES_ID.add(
                             childBranch.child("id").value.toString()
                         )
-                    }
                 }
             }
 

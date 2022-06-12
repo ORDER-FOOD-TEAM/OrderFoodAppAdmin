@@ -32,9 +32,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class AnalyzeActivity : AppCompatActivity() {
-    private var year = arrayOf(2022, 2021, 2020)
-    private var monthOptions = arrayOf("All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-    private var dayOptions = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
+//    private var year = arrayOf(2022, 2021, 2020)
+//    private var monthOptions = arrayOf("All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+//    private var dayOptions = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
     lateinit var providerId: String
     lateinit var dishesId: ArrayList<String>
 
@@ -61,6 +61,10 @@ class AnalyzeActivity : AppCompatActivity() {
                     i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(i)
                     Toast.makeText(applicationContext, "Sign out", Toast.LENGTH_SHORT).show()
+                }
+                R.id.orders -> {
+                    val intent = Intent(Intent(this, OrdersActivity::class.java))
+                    startActivity(intent)
                 }
             }
             true
@@ -253,10 +257,12 @@ class AnalyzeActivity : AppCompatActivity() {
                             seriesData.add(ValueDataEntry(childBranch.child("time").value.toString(), 0))
                         }
                     }
+
                     for(childBranch in snapshot.children){
                         println(childBranch.child("time").value.toString())
                         //check if bill is purchased
-                        if (childBranch.child("status").value.toString() == "done"){
+                        if (childBranch.child("status").value.toString() == "Done"){
+                            println("RUN Done")
                             //get products reference of one bill
                             val ref = childBranch.child("products").ref
 
@@ -285,19 +291,23 @@ class AnalyzeActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(productChildBranch in snapshot.children){
                     //get dishId
+                    println("LOAD BILL")
                     val dishId = productChildBranch.child("id").value.toString()
                     if (dishesId.contains(dishId)){
                         val index = dishesId.indexOf(dishId)
-                        val amount = productChildBranch.child("amount").value.toString().toInt()
+//                        val amount = productChildBranch.child("amount").value.toString().toInt()
 
-                        when(productChildBranch.child("id").value.toString()){
-                            "S" -> dishIncomes[index].amountS += amount
-                            "M" -> dishIncomes[index].amountM += amount
-                            "L" -> dishIncomes[index].amountL += amount
-                        }
+//                        when(productChildBranch.child("id").value.toString()){
+//                            "S" -> dishIncomes[index].amountS += amount
+//                            "M" -> dishIncomes[index].amountM += amount
+//                            "L" -> dishIncomes[index].amountL += amount
+//                        }
+
                         seriesData.forEach {
                             if (it.getValue("x") == date){
-                                it.setValue("value", it.getValue("value").toString().toDouble() + productChildBranch.child("unitPrice").value.toString().toDouble())
+                                it.setValue("value"
+                                    , it.getValue("value").toString().toDouble()
+                                            + productChildBranch.child("unitPrice").value.toString().toDouble())
                             }
                         }
                         dishIncomes[index].totalIncome += productChildBranch.child("unitPrice").value.toString().toFloat()

@@ -101,7 +101,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Amount S: "
+                            android:text="Price S: "
                             android:textColor="@color/plain_black"
                             android:textSize="17sp"
                             android:textStyle="bold"
@@ -109,7 +109,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/foodName_textView" />
 
                         <TextView
-                            android:id="@+id/amountS_value"
+                            android:id="@+id/priceS_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1"
@@ -123,7 +123,7 @@
                             android:id="@+id/textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Amount M: "
+                            android:text="Price M: "
                             android:textColor="@color/plain_black"
                             android:textSize="17sp"
                             android:textStyle="bold"
@@ -131,7 +131,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/amount_textView" />
 
                         <TextView
-                            android:id="@+id/amountM_value"
+                            android:id="@+id/priceM_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2"
@@ -144,7 +144,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Amount L: "
+                            android:text="Price L: "
                             android:textColor="@color/plain_black"
                             android:textSize="17sp"
                             android:textStyle="bold"
@@ -152,7 +152,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                         <TextView
-                            android:id="@+id/amountL_value"
+                            android:id="@+id/priceL_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="3"
