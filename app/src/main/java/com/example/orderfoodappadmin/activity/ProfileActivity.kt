@@ -78,6 +78,10 @@ class ProfileActivity : AppCompatActivity() {
                     val intent = Intent(Intent(this, AnalyzeActivity::class.java))
                     startActivity(intent)
                 }
+                R.id.orders -> {
+                    val intent = Intent(Intent(this, OrdersActivity::class.java))
+                    startActivity(intent)
+                }
             }
             true
         }
