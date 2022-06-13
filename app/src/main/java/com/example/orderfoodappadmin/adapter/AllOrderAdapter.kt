@@ -54,9 +54,15 @@ class AllOrderAdapter(
             when (curOrder.status) {
                 "Pending" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     color = context.getColor(R.color.yellow)
+                    back_button.setColorFilter(color);
                 }
                 "Decline" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     color = context.getColor(R.color.red)
+                    back_button.setColorFilter(color);
+                }
+                "Done" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    color = context.getColor(R.color.green)
+                    back_button.setColorFilter(color);
                 }
 
                 else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
