@@ -182,6 +182,8 @@ class OrderDetail : AppCompatActivity() {
             deliveryFee_text.text = "$${df.format(deliveryFee)}"
             date_text.text = formattedDate
 
+            address_text.text = it.child("address").value.toString()
+
             status_text.text = it.child("status").value.toString()
 
             when (it.child("status").value as String) {
@@ -209,7 +211,6 @@ class OrderDetail : AppCompatActivity() {
                         orderid_text.text = id
                         name_text.text = data.child("fullName").value.toString()
                         phone_text.text = data.child("phoneNumber").value.toString()
-                        address_text.text = data.child("address").value.toString()
                     }
                 }
             }
