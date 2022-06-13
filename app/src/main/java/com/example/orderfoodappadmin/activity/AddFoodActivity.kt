@@ -40,9 +40,6 @@ class AddFoodActivity : AppCompatActivity() {
     lateinit var price_s_size: EditText
     lateinit var price_m_size: EditText
     lateinit var price_l_size: EditText
-    lateinit var amount_s_size: EditText
-    lateinit var amount_m_size: EditText
-    lateinit var amount_l_size: EditText
     lateinit var image_food: ImageView
     lateinit var description_edit_text: EditText
 
@@ -97,7 +94,7 @@ class AddFoodActivity : AppCompatActivity() {
 
 
         //set data for type of food combobox
-        val listOption = arrayListOf("All food", "Pizza", "Drinking", "Hamburger")
+        val listOption = arrayListOf("Pizza", "Drinking", "Hamburger", "Others")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOption)
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice)
         type_of_food_option.adapter = adapter
@@ -125,9 +122,6 @@ class AddFoodActivity : AppCompatActivity() {
         price_m_size.text.clear()
         price_l_size.text.clear()
 
-        amount_s_size.text.clear()
-        amount_m_size.text.clear()
-        amount_l_size.text.clear()
 
         image_food.setImageDrawable(null)
         description_edit_text.text.clear()
@@ -144,9 +138,6 @@ class AddFoodActivity : AppCompatActivity() {
             val priceM = price_m_size.text.toString().toDouble()
             val priceL = price_l_size.text.toString().toDouble()
 
-            val amountS = amount_s_size.text.toString().toLong()
-            val amountM = amount_m_size.text.toString().toLong()
-            val amountL = amount_l_size.text.toString().toLong()
 
             val description = description_edit_text.text.toString()
 
